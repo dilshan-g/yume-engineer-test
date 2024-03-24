@@ -17,4 +17,6 @@ Route::middleware('auth:api')->group(function(){
     Route::post('/products', [ProductController::class, 'store']);
     // Update a product.
     Route::put('/products/{id}', [ProductController::class, 'update']);
+    // Delete a product.
+    Route::delete('/products/{id}', [ProductController::class, 'delete']);
 });

@@ -107,4 +107,32 @@ class ProductController extends Controller
         }
 
     }
+
+    /**
+     * Deletes product by ID
+     *
+     * @param $id
+     * @return Application|ResponseFactory|\Illuminate\Foundation\Application|Response
+     */
+    public function delete($id)
+    {
+        try {
+            if (!is_numeric($id)) {
+                return response(['message' => 'Product ID must be an Integer.'], 422);
+            }
+
+            $product = Product::find($id);
+
+            if (!empty($product)) {
+                $product->delete();
+                return response('', 204);
+            } else {
+                return response(['message' => 'The Product not found.'], 422);
+            }
+
+        } catch (QueryException $e) {
+            return response([$e->getMessage()], 200);
+        }
+
+    }
 }
