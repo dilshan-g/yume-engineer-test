@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -49,18 +49,12 @@ class ProductController extends Controller
     /**
      * Creates a product.
      *
-     * @param Request $request
+     * @param ProductRequest $request
      * @return Application|ResponseFactory|\Illuminate\Foundation\Application|Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         try {
-            // Validations for the `name` and `price` fields.
-            $request->validate([
-                'name' => 'required|min:3',
-                'price' => 'decimal:2'
-            ]);
-
             $product = Product::create($request->all());
 
             if (is_null($product)) {
@@ -77,21 +71,16 @@ class ProductController extends Controller
     /**
      * Updates product by ID.
      *
-     * @param Request $request
+     * @param ProductRequest $request
      * @param $id
      * @return Application|ResponseFactory|\Illuminate\Foundation\Application|Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         try {
             if (!is_numeric($id)) {
                 return response(['message' => 'Product ID must be an Integer.'], 422);
             }
-
-            $request->validate([
-                'name' => 'required|min:3',
-                'price' => 'decimal:2'
-            ]);
 
             $product = Product::find($id);
 
