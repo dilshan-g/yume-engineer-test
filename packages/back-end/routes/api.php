@@ -13,4 +13,6 @@ Route::middleware('auth:api')->group(function(){
 
     // Fetch one product.
     Route::get('/products/{id}', [ProductController::class, 'show']);
+    // Create a product.
+    Route::post('/products', [ProductController::class, 'store']);
 });

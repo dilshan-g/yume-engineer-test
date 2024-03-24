@@ -45,4 +45,32 @@ class ProductController extends Controller
         }
 
     }
+
+    /**
+     * Creates a product.
+     *
+     * @param Request $request
+     * @return Application|ResponseFactory|\Illuminate\Foundation\Application|Response
+     */
+    public function store(Request $request)
+    {
+        try {
+            // Validations for the `name` and `price` fields.
+            $request->validate([
+                'name' => 'required|min:3',
+                'price' => 'decimal:2'
+            ]);
+
+            $product = Product::create($request->all());
+
+            if (is_null($product)) {
+                return response(['message' => 'Unable to create the Product.'], 400);
+            }
+            return response(['message' => 'Product created successfully.', 'payload' => $product], 200);
+
+        } catch (QueryException $e) {
+            return response([$e->getMessage()], 200);
+        }
+
+    }
 }
