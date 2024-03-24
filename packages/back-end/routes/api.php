@@ -10,4 +10,7 @@ Route::middleware('auth:api')->group(function(){
     });
 
     Route::get('/products', [ProductController::class, 'index']);
+
+    // Fetch one product.
+    Route::get('/products/{id}', [ProductController::class, 'show']);
 });
