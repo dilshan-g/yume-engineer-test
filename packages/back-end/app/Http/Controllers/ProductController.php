@@ -19,6 +19,7 @@ class ProductController extends Controller
      */
     public function index(): JsonResponse
     {
+        // TODO: Change here to send paginated result.
         return response()->json(Product::all());
     }
 

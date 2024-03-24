@@ -82,4 +82,27 @@ Create a basic CRUD (Create, Read, Update, Delete) application for managing prod
 
 This test aims to evaluate your understanding of Laravel basics, including routing, controllers, models, validation, testing and optionally pagination.
 Make sure to follow Laravel's conventions and best practices while implementing the solution.
-Good 
+Good
+
+#### Solution
+
+### Installation
+
+Please follow the original instructions above to set up the project locally.
+
+### Executing the API
+
+* Please find the provided Postman request collection for this API and import it to your local Postman.
+* Open the `Generate Oauth Token` request and generate a new Access Token.
+* Copy the Access Token
+* Add it to each request via the `Authorization` header as follows:
+```
+Bearer <the copied token>
+```
+### Testing and Validation
+
+* Please run `php artisan test` to run the unit tests.
+* In order to validate the user input, following actions were taken:
+    * A new Request class named `ProductRequest` created to unload the validations from the Controller.
+    * Checking if the product ID provided is a number.
+* The user input will be sanitised/escaped by the already existing two middlewares [here](https://github.com/dilshan-g/yume-engineer-test/blob/main/packages/back-end/app/Http/Kernel.php#L22-L23). No extra actions were taken to sanitise the input.

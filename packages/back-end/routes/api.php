@@ -9,8 +9,11 @@ Route::middleware('auth:api')->group(function(){
         return $request->user();
     });
 
-    Route::get('/products', [ProductController::class, 'index']);
+    // TODO: API naming convention should contain a version number.
+    // Change the APIs path to be something like this `/api/v1/products`.
 
+    // Gets all the products.
+    Route::get('/products', [ProductController::class, 'index']);
     // Fetch one product.
     Route::get('/products/{id}', [ProductController::class, 'show']);
     // Create a product.
