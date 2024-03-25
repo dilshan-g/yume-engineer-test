@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { Product } from '~/models'
   import { useProductStore } from '@/stores';
+  import Pagination from "~/components/Pagination";
   const { products } = useProductStore();
 </script>
 
@@ -13,6 +14,7 @@
         </div>
     </div>
     <div class="flex flex-wrap mt-8">
-        <Product v-for="product in products.data" :key="product.id" :product="product" />
+        <Product v-for="product in products.data.data" :key="product.id" :product="product" />
     </div>
+    <Pagination :links="products.data.links" class="mt-6" />
 </template>

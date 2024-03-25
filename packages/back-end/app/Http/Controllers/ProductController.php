@@ -13,14 +13,13 @@ use Illuminate\Http\Response;
 class ProductController extends Controller
 {
     /**
-     * Returns all the products.
+     * Returns all the products with pagination.
      *
      * @return JsonResponse
      */
     public function index(): JsonResponse
     {
-        // TODO: Change here to send paginated result.
-        return response()->json(Product::all());
+        return response()->json(Product::paginate(10));
     }
 
     /**
